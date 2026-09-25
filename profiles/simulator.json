@@ -1,0 +1,77 @@
+{
+  "profileId": "simulator",
+  "version": "1",
+  "label": "虚拟角色 · 七项表达",
+  "capabilities": [
+    {
+      "id": "nod",
+      "semanticTags": ["approval", "nod"],
+      "parameters": {
+        "intensity": {
+          "type": "number",
+          "min": 0,
+          "max": 1,
+          "default": 0.7
+        }
+      },
+      "interruptible": true,
+      "durationMs": 1800,
+      "maxDurationMs": 12000,
+      "visual": "nod"
+    },
+    {
+      "id": "nod_double",
+      "semanticTags": ["proud_approval", "nod_double"],
+      "parameters": {},
+      "interruptible": true,
+      "durationMs": 1800,
+      "maxDurationMs": 12000,
+      "visual": "nod_double"
+    },
+    {
+      "id": "shake_head",
+      "semanticTags": ["refusal", "rejection", "shake_head"],
+      "parameters": {},
+      "interruptible": true,
+      "durationMs": 1800,
+      "maxDurationMs": 12000,
+      "visual": "shake_head"
+    },
+    {
+      "id": "tilt_left",
+      "semanticTags": ["curiosity_left", "tilt_left"],
+      "parameters": {},
+      "interruptible": true,
+      "durationMs": 1800,
+      "maxDurationMs": 12000,
+      "visual": "tilt_left"
+    },
+    {
+      "id": "tilt_right",
+      "semanticTags": ["curiosity_right", "tilt_right"],
+      "parameters": {},
+      "interruptible": true,
+      "durationMs": 1800,
+      "maxDurationMs": 12000,
+      "visual": "tilt_right"
+    },
+    {
+      "id": "wave",
+      "semanticTags": ["greeting", "wave"],
+      "parameters": {},
+      "interruptible": true,
+      "durationMs": 1800,
+      "maxDurationMs": 12000,
+      "visual": "wave"
+    },
+    {
+      "id": "dance",
+      "semanticTags": ["dance"],
+      "parameters": {},
+      "interruptible": true,
+      "durationMs": 1800,
+      "maxDurationMs": 12000,
+      "visual": "dance"
+    }
+  ]
+}

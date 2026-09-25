@@ -1,0 +1,513 @@
+:root {
+  font-family:
+    Inter,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    "PingFang SC",
+    sans-serif;
+  color: #253b30;
+  background: #f4f5ed;
+  font-synthesis: none;
+}
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+}
+button,
+select,
+input,
+textarea {
+  font: inherit;
+}
+button,
+a,
+select {
+  touch-action: manipulation;
+}
+button {
+  border: 1px solid #cdd3c6;
+  background: #fffef9;
+  color: #2e4538;
+  padding: 10px 13px;
+  border-radius: 7px;
+  cursor: pointer;
+  font-size: 13px;
+}
+button:hover {
+  border-color: #698661;
+  background: #f0f3e9;
+}
+button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible,
+summary:focus-visible,
+textarea:focus-visible {
+  outline: 3px solid #8ea477;
+  outline-offset: 3px;
+}
+a {
+  color: inherit;
+}
+.lab {
+  max-width: 1650px;
+  margin: auto;
+  padding: 0 36px;
+}
+header {
+  height: 80px;
+  border-bottom: 1px solid #dce0d3;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.brand {
+  text-decoration: none;
+  letter-spacing: -1px;
+  font-size: 24px;
+  font-weight: 750;
+}
+.brand span {
+  font-weight: 400;
+  color: #708071;
+}
+.local-status {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 12px;
+  color: #697868;
+}
+.local-status i,
+.preview-bottom i {
+  width: 6px;
+  height: 6px;
+  background: #758d66;
+  border-radius: 50%;
+}
+.local-status small {
+  margin-left: 16px;
+}
+.intro {
+  padding: 39px 0 32px;
+}
+.eyebrow {
+  font-size: 11px;
+  letter-spacing: 2px;
+  color: #728463;
+  font-weight: 650;
+}
+h1 {
+  font-weight: 500;
+  letter-spacing: -1.5px;
+  font-size: 38px;
+  margin: 12px 0;
+}
+p {
+  line-height: 1.65;
+}
+.intro p {
+  font-size: 14px;
+  color: #6a786b;
+  margin: 0;
+}
+.workspace {
+  display: grid;
+  grid-template-columns: 270px minmax(360px, 1fr) 280px;
+  gap: 22px;
+  align-items: start;
+}
+.setup,
+.evidence {
+  background: #fafbf5;
+  border: 1px solid #dce1d2;
+  border-radius: 10px;
+  padding: 22px;
+}
+.section-title {
+  font-size: 13px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0 0 24px;
+}
+.section-title b {
+  font-size: 11px;
+  color: #81906f;
+}
+.asset-title {
+  margin: 26px 0 12px;
+  padding-top: 23px;
+  border-top: 1px solid #dce1d2;
+}
+label {
+  display: block;
+  font-size: 12px;
+  color: #586954;
+  margin: 18px 0 7px;
+}
+select {
+  display: block;
+  width: 100%;
+  margin-top: 7px;
+  padding: 10px 8px;
+  border: 1px solid #d3dacb;
+  background: #fffef9;
+  border-radius: 6px;
+  color: #304532;
+  font-size: 13px;
+}
+.cap-list {
+  display: flex;
+  gap: 5px;
+  flex-wrap: wrap;
+  margin: 14px 0 20px;
+}
+.cap-list span {
+  padding: 4px 6px;
+  background: #eaf0df;
+  font:
+    10px ui-monospace,
+    monospace;
+  color: #5b6f4f;
+  border-radius: 4px;
+}
+details {
+  margin-top: 18px;
+}
+summary {
+  font-size: 12px;
+  cursor: pointer;
+  color: #566b4e;
+}
+details p,
+.help {
+  font-size: 12px;
+  color: #7a8573;
+  line-height: 1.75;
+}
+.json-editor {
+  width: 100%;
+  height: 230px;
+  resize: vertical;
+  border: 1px solid #d4dccb;
+  padding: 8px;
+  margin: 8px 0;
+  font:
+    11px ui-monospace,
+    monospace;
+}
+.row {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.row small {
+  font-size: 10px;
+  color: #7b8870;
+  flex: 1;
+  min-width: 130px;
+  line-height: 1.5;
+}
+.preview {
+  border: 1px solid #d6ddce;
+  background: #fffef8;
+  border-radius: 10px;
+  overflow: hidden;
+}
+.preview-top,
+.preview-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 17px 22px;
+  font-size: 12px;
+}
+.preview-top {
+  background: #e9eee7;
+}
+.pill {
+  border: 1px solid #c6d1c0;
+  border-radius: 20px;
+  padding: 5px 10px;
+  color: #667b5d;
+  font-size: 10px;
+}
+.stage {
+  height: 395px;
+  position: relative;
+}
+.stage canvas {
+  display: block;
+}
+.stage-caption {
+  position: absolute;
+  bottom: 18px;
+  left: 22px;
+  font-size: 10px;
+  letter-spacing: 0.3px;
+  color: #688060;
+  pointer-events: none;
+}
+.stage-caption span {
+  display: block;
+  font-size: 9px;
+  margin-top: 7px;
+  color: #8a9980;
+}
+.stage-error {
+  position: absolute;
+  z-index: 1;
+  left: 10%;
+  top: 35%;
+  width: 80%;
+  font-size: 13px;
+  color: #715e48;
+  background: #fffceedd;
+  padding: 15px;
+  border-radius: 8px;
+}
+.preview-bottom {
+  border-top: 1px solid #dce1d2;
+  background: #f4f7ec;
+  gap: 8px;
+  justify-content: start;
+  font-size: 11px;
+}
+.preview-bottom span {
+  margin-left: auto;
+  color: #819072;
+  font-size: 10px;
+}
+.composer {
+  padding: 6px 22px 22px;
+}
+.composer form {
+  display: flex;
+  gap: 8px;
+}
+.composer input {
+  min-width: 0;
+  flex: 1;
+  border: 1px solid #cbd6c1;
+  border-radius: 7px;
+  padding: 12px;
+  font-size: 14px;
+  color: #374d33;
+  background: white;
+}
+.primary {
+  background: #385443;
+  color: #fff;
+  border-color: #385443;
+}
+.primary:hover {
+  background: #486451;
+  color: #fff;
+}
+.examples {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin: 12px 0 22px;
+}
+.examples button {
+  font-size: 11px;
+  padding: 6px 9px;
+  border-radius: 16px;
+  background: #f9faf3;
+}
+.stop {
+  color: #9b5b48;
+  border-color: #d8c8be;
+  background: #fcf8f1;
+}
+.error {
+  font-size: 12px;
+  color: #a44531;
+  background: #fbede5;
+  padding: 12px;
+  border-radius: 5px;
+}
+.outcome {
+  border-bottom: 1px solid #e0e5d6;
+  padding: 0 0 18px;
+}
+.outcome span {
+  font-size: 10px;
+  color: #8a9780;
+  display: block;
+}
+.outcome strong {
+  font-size: 20px;
+  font-weight: 500;
+  display: block;
+  margin: 12px 0;
+}
+.outcome p {
+  font-size: 12px;
+  color: #74806c;
+}
+.timeline {
+  list-style: none;
+  padding: 0;
+  margin: 20px 0;
+}
+.timeline li {
+  display: flex;
+  gap: 10px;
+  position: relative;
+  padding-bottom: 20px;
+}
+.timeline li i {
+  width: 7px;
+  height: 7px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: #91a579;
+  margin-top: 5px;
+}
+.timeline li:not(:last-child):before {
+  content: "";
+  position: absolute;
+  left: 3px;
+  top: 14px;
+  bottom: 4px;
+  width: 1px;
+  background: #dde5d3;
+}
+.timeline b {
+  font-size: 12px;
+  font-weight: 500;
+  display: block;
+}
+.timeline code {
+  display: block;
+  font-size: 10px;
+  margin: 5px 0;
+  color: #718366;
+}
+.timeline small {
+  display: block;
+  font-size: 10px;
+  color: #849078;
+  overflow-wrap: anywhere;
+}
+.evidence > button {
+  width: 100%;
+}
+pre {
+  font:
+    10px/1.7 ui-monospace,
+    monospace;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  max-height: 300px;
+  overflow: auto;
+  background: #eef2e7;
+  padding: 12px;
+  border-radius: 5px;
+}
+.hardware-note {
+  font-size: 12px;
+  background: #fff1d4;
+  padding: 12px;
+  margin-bottom: 12px;
+  border-radius: 5px;
+}
+footer {
+  display: flex;
+  justify-content: space-between;
+  padding: 24px 0 35px;
+  font-size: 11px;
+  color: #829074;
+}
+footer a {
+  text-decoration: none;
+}
+@media (max-width: 1180px) {
+  .workspace {
+    grid-template-columns: 230px minmax(320px, 1fr);
+  }
+  .evidence {
+    grid-column: 1/-1;
+  }
+  .timeline {
+    display: flex;
+    gap: 25px;
+  }
+  .timeline li {
+    flex: 1;
+  }
+  .timeline li:before {
+    display: none;
+  }
+  .lab {
+    padding: 0 22px;
+  }
+}
+@media (max-width: 700px) {
+  .lab {
+    padding: 0 15px;
+  }
+  header {
+    height: 65px;
+  }
+  .brand {
+    font-size: 20px;
+  }
+  .local-status {
+    font-size: 10px;
+  }
+  .local-status small {
+    display: none;
+  }
+  h1 {
+    font-size: 29px;
+  }
+  .intro {
+    padding: 28px 0;
+  }
+  .intro p {
+    font-size: 12px;
+  }
+  .workspace {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+  .setup {
+    padding: 18px;
+  }
+  .stage {
+    height: 320px;
+  }
+  .timeline {
+    display: block;
+  }
+  .preview-top,
+  .preview-bottom {
+    padding: 13px;
+  }
+  .composer {
+    padding: 6px 13px 18px;
+  }
+  footer {
+    font-size: 10px;
+    gap: 12px;
+  }
+  .evidence {
+    grid-column: auto;
+  }
+  .stage-caption {
+    left: 15px;
+  }
+}

@@ -1,0 +1,55 @@
+{
+  "name": "cowcoming-harness",
+  "version": "0.1.0",
+  "description": "Composable interaction runtime for characters and robots, with truthful execution evidence",
+  "type": "module",
+  "license": "Apache-2.0",
+  "exports": {
+    ".": "./src/index.mjs",
+    "./benben": "./src/benben-http.mjs",
+    "./browser": "./src/browser.mjs"
+  },
+  "scripts": {
+    "dev": "node --env-file-if-exists=.env scripts/dev.mjs",
+    "build": "vite build",
+    "test": "node --test tests/*.test.mjs",
+    "test:bridge": "python3 -m unittest discover -s tests -p \"test_*.py\"",
+    "demo": "node examples/simulator-demo.mjs",
+    "sandbox": "node examples/model-sandbox.mjs",
+    "qa": "node scripts/qa.mjs"
+  },
+  "engines": {
+    "node": ">=24"
+  },
+  "dependencies": {
+    "react": "19.2.0",
+    "react-dom": "19.2.0",
+    "three": "0.183.0"
+  },
+  "devDependencies": {
+    "vite": "^7.3.0",
+    "playwright": "1.63.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ericshang98/cowcoming-harness.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ericshang98/cowcoming-harness/issues"
+  },
+  "files": [
+    "src/",
+    "profiles/",
+    "bridges/",
+    "docs/",
+    "examples/",
+    "web/",
+    "server/",
+    "scripts/",
+    "index.html",
+    "vite.config.mjs",
+    "LICENSE",
+    "THIRD_PARTY_NOTICES.md",
+    ".env.example"
+  ]
+}

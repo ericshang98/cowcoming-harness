@@ -1,0 +1,54 @@
+{
+  "profileId": "benben-five-servo",
+  "version": "1",
+  "label": "BenBen · 五项回应",
+  "hardwareVerified": false,
+  "contract": "Fixed taught-motion IDs; timed playback is not physical-position evidence. No joint parameters are accepted.",
+  "capabilities": [
+    {
+      "id": "nod",
+      "semanticTags": ["approval", "nod"],
+      "parameters": {},
+      "interruptible": true,
+      "durationMs": 1800,
+      "maxDurationMs": 12000,
+      "visual": "nod"
+    },
+    {
+      "id": "nod_double",
+      "semanticTags": ["proud_approval", "nod_double"],
+      "parameters": {},
+      "interruptible": true,
+      "durationMs": 1800,
+      "maxDurationMs": 12000,
+      "visual": "nod_double"
+    },
+    {
+      "id": "shake_head",
+      "semanticTags": ["refusal", "rejection", "shake_head"],
+      "parameters": {},
+      "interruptible": true,
+      "durationMs": 1800,
+      "maxDurationMs": 12000,
+      "visual": "shake_head"
+    },
+    {
+      "id": "tilt_left",
+      "semanticTags": ["curiosity_left", "tilt_left"],
+      "parameters": {},
+      "interruptible": true,
+      "durationMs": 1800,
+      "maxDurationMs": 12000,
+      "visual": "tilt_left"
+    },
+    {
+      "id": "tilt_right",
+      "semanticTags": ["curiosity_right", "tilt_right"],
+      "parameters": {},
+      "interruptible": true,
+      "durationMs": 1800,
+      "maxDurationMs": 12000,
+      "visual": "tilt_right"
+    }
+  ]
+}
