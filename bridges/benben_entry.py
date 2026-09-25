@@ -30,7 +30,7 @@ class HarnessExtension:
         if not isinstance(plan, dict) or plan.get('profileId') != 'benben-five-servo' or plan.get('profileVersion') != '1':
             raise ValueError('profile mismatch')
         pid = plan.get('planId')
-        if not isinstance(pid, str) or not 1 <= len(pid) <= 240:
+        if not isinstance(pid, str) or not 1 <= len(pid) <= 256:
             raise ValueError('invalid planId')
         expiry = plan.get('expiresAt')
         if not isinstance(expiry, (int, float)) or not math.isfinite(expiry) or not self.clock()*1000 < expiry <= self.clock()*1000 + 60000:

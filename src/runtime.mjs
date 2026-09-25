@@ -143,12 +143,12 @@ export function createRuntime({
       if (intent.requestId !== input.requestId)
         throw new Error("model changed requestId");
       if (intent.type === "stop") {
-        halted = true;
-        safety.stop();
-        emit("stopped", {
-          reason: "model requested stop; no motion dispatched",
+        const stopped = await runtime.stop();
+        emit(stopped.status, {
+          reason: "model requested stop",
+          completionBasis: stopped.completionBasis,
         });
-        return { status: "stopped", intent, events };
+        return { status: stopped.status, intent, events };
       }
       const planned = planIntent(intent, p, { now: clock });
       if (planned.status !== "ready") {

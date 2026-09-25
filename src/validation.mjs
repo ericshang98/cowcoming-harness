@@ -3,9 +3,11 @@ export const isRecord = (v) =>
   v !== null &&
   typeof v === "object" &&
   Object.getPrototypeOf(v) === Object.prototype;
-export const requireString = (v, name) => {
-  if (typeof v !== "string" || !v.trim() || v.length > 240)
-    throw new TypeError(`${name} must be a non-empty string (max 240)`);
+export const requireString = (v, name, maxLength = 240) => {
+  if (typeof v !== "string" || !v.trim() || v.length > maxLength)
+    throw new TypeError(
+      `${name} must be a non-empty string (max ${maxLength})`,
+    );
 };
 export const finite = (v, name) => {
   if (!Number.isFinite(v)) throw new TypeError(`${name} must be finite`);
@@ -52,7 +54,7 @@ export function validateProfile(v) {
 }
 export function validatePlan(v) {
   record(v, "plan");
-  requireString(v.planId, "planId");
+  requireString(v.planId, "planId", 256);
   requireString(v.intentId, "intentId");
   requireString(v.profileId, "profileId");
   finite(v.expiresAt, "expiresAt");
@@ -76,8 +78,8 @@ export function validateExecutionEvent(v) {
   record(v, "execution event");
   if (!EXECUTION_STATUSES.includes(v.status))
     throw new TypeError("invalid execution status");
-  requireString(v.eventId, "eventId");
-  requireString(v.planId, "planId");
+  requireString(v.eventId, "eventId", 320);
+  requireString(v.planId, "planId", 256);
   if (typeof v.simulated !== "boolean" || typeof v.sensorVerified !== "boolean")
     throw new TypeError("simulated and sensorVerified must be boolean");
   finite(v.timestamp, "timestamp");

@@ -20,7 +20,7 @@ const runtime = createRuntime({
 await runtime.handle({ requestId: "example-1", text: "请点一下头" });
 ```
 
-- **Intent**：`requestId, type, semantic, params?, confidence?, target?, expiresAt?`。v0.1 只执行 `express`；`stop` 停止接受新请求；`track/speak` 拒绝。`target` 若提供，必须匹配选中 profile。
+- **Intent**：`requestId, type, semantic, params?, confidence?, target?, expiresAt?`。v0.1 只执行 `express`；`stop` 请求停止当前拥有的设备动作，并停止接受新请求；`track/speak` 拒绝。`target` 若提供，必须匹配选中 profile。
 - **Plan**：`planId, intentId, profileId, profileVersion, semantic, createdAt, expiresAt, durationMs, steps`。当前恰好一个 step：`capabilityId + args`；所有下发计划深度冻结。
 - **ExecutionEvent**：`eventId, requestId, planId, status, timestamp, simulated, sensorVerified`，及可选 `completionBasis / reason`。事件是只读快照。
 - **View record**：`animationEvents` 单独记录 GLB / 内置角色播放和缺失状态。它是视觉证据，不改变执行结果；导出 JSON 同时包含它和执行 events。

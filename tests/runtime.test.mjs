@@ -234,3 +234,39 @@ test("unimplemented intent types and a different target never reach an executor"
     assert.equal(executor.plans.length, 0);
   }
 });
+test("stop intent invokes the owned executor stop and reports its confirmation", async () => {
+  const model = new FunctionModelAdapter((i) => ({
+    requestId: i.requestId,
+    type: "stop",
+    semantic: "stop",
+  }));
+  let stops = 0;
+  const executor = new RecordingExecutor();
+  executor.stop = async () => {
+    stops++;
+    return { confirmed: true, completionBasis: "simulated" };
+  };
+  const runtime = make({ model, executor });
+  assert.equal((await runtime.handle(input())).status, "stopped");
+  assert.equal(stops, 1);
+  assert.equal(executor.plans.length, 0);
+});
+test("maximum-size request IDs remain valid after plan and receipt prefixes", async () => {
+  const executor = createBenBenExecutor({
+    send: async (p) => ({
+      planId: p.planId,
+      status: "completed",
+      completionBasis: "timed_commands",
+    }),
+    getState: async () => ({
+      online: true,
+      authorized: true,
+      leaseExpiresAt: Date.now() + 5000,
+    }),
+    stop: async () => ({ confirmed: true }),
+  });
+  assert.equal(
+    (await make({ executor }).handle(input("r".repeat(240)))).status,
+    "completed",
+  );
+});
