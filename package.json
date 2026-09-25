@@ -1,13 +1,14 @@
 {
   "name": "cowcoming-harness",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Composable interaction runtime for characters and robots, with truthful execution evidence",
   "type": "module",
   "license": "Apache-2.0",
   "exports": {
     ".": "./src/index.mjs",
     "./benben": "./src/benben-http.mjs",
-    "./browser": "./src/browser.mjs"
+    "./browser": "./src/browser.mjs",
+    "./pet": "./src/pet.mjs"
   },
   "scripts": {
     "dev": "node --env-file-if-exists=.env scripts/dev.mjs",
@@ -16,7 +17,9 @@
     "test:bridge": "python3 -m unittest discover -s tests -p \"test_*.py\"",
     "demo": "node examples/simulator-demo.mjs",
     "sandbox": "node examples/model-sandbox.mjs",
-    "qa": "node scripts/qa.mjs"
+    "qa": "node scripts/qa.mjs",
+    "qa:pet": "node scripts/qa-pet.mjs",
+    "demo:motion": "node examples/robot-motion-demo.mjs"
   },
   "engines": {
     "node": ">=24"

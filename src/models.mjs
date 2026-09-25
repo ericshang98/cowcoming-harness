@@ -1,4 +1,9 @@
 import { validateIntent } from "./validation.mjs";
+import { explicitAction } from "./pet-decision.mjs";
+export function requestedMotion(text = "") {
+  const id = explicitAction(text);
+  return { shake: "shake_head", wait: "unsupported" }[id] ?? id;
+}
 export class MockModelAdapter {
   async decide(input) {
     // Explicit fixture control is preferred; text matching is deliberately a demo, not NLU.
@@ -6,7 +11,8 @@ export class MockModelAdapter {
     if (!semantic) {
       const text = input.text ?? "";
       if (/不要|别|不许|don't|do not/i.test(text)) semantic = "unsupported";
-      else if (/双点头/.test(text)) semantic = "proud_approval";
+      else if (/双点头|点两次头|点头两[次下]|点两下头/.test(text))
+        semantic = "proud_approval";
       else if (/左.*歪|tilt.left/i.test(text)) semantic = "curiosity_left";
       else if (/右.*歪|tilt.right/i.test(text)) semantic = "curiosity_right";
       else if (/摇头|拒绝|shake/i.test(text)) semantic = "refusal";
@@ -21,6 +27,9 @@ export class MockModelAdapter {
       semantic,
       params: input.params ?? {},
       confidence: 1,
+      ...(requestedMotion(input.text)
+        ? { requiredMotion: requestedMotion(input.text) }
+        : {}),
     });
   }
 }

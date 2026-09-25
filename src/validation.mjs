@@ -35,6 +35,8 @@ export function validateIntent(v) {
   )
     throw new TypeError("confidence must be finite and between 0 and 1");
   if (v.target !== undefined) requireString(v.target, "target");
+  if (v.requiredMotion !== undefined)
+    requireString(v.requiredMotion, "requiredMotion");
   if (v.expiresAt !== undefined) finite(v.expiresAt, "expiresAt");
   return Object.freeze({ ...v });
 }

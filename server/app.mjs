@@ -9,6 +9,7 @@ import {
   loadProfile,
 } from "../src/index.mjs";
 import { createBenBenHttpExecutor } from "../src/benben-http.mjs";
+import { createPetApi } from "./pet-api.mjs";
 export async function createLabServer({
   env = process.env,
   uiHandler,
@@ -17,6 +18,7 @@ export async function createLabServer({
   const csrf = randomBytes(24).toString("hex"),
     sessions = new Map();
   let hardwareOwner = null;
+  const petApi = createPetApi({ fetchImpl });
   const profiles = await Promise.all(
     ["simulator", "benben-five-servo", "waving-robot"].map((n) =>
       loadProfile(new URL(`../profiles/${n}.json`, import.meta.url)),
@@ -36,12 +38,12 @@ export async function createLabServer({
     });
     res.end(JSON.stringify(value));
   };
-  async function body(req) {
+  async function body(req, limit = 65536) {
     let size = 0;
     const chunks = [];
     for await (const chunk of req) {
       size += chunk.length;
-      if (size > 65536) throw Error("request too large");
+      if (size > limit) throw Error("request too large");
       chunks.push(chunk);
     }
     const value = JSON.parse(Buffer.concat(chunks).toString());
@@ -88,7 +90,11 @@ export async function createLabServer({
         json(res, 415, { error: "JSON required" });
         return;
       }
-      const data = await body(req);
+      const data = await body(
+        req,
+        path.startsWith("/api/pet/") ? 262144 : 65536,
+      );
+      if (await petApi(path, data, req, res, json)) return;
       if (path === "/api/session") {
         for (const [id, old] of sessions) {
           if (!old.runtime.busy && Date.now() - old.touched > 30 * 60 * 1000) {

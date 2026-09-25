@@ -20,8 +20,10 @@ export function planIntent(intent, profile, { now = Date.now } = {}) {
     if (i.target !== undefined && i.target !== p.profileId)
       return { status: "rejected", reason: "intent target mismatch" };
     // No fuzzy fallback: explicit left/right or requested motion must keep its meaning.
-    const candidates = p.capabilities.filter((c) =>
-      c.semanticTags.includes(i.semantic),
+    const candidates = p.capabilities.filter(
+      (c) =>
+        c.semanticTags.includes(i.semantic) &&
+        (!i.requiredMotion || (c.motion ?? c.visual) === i.requiredMotion),
     );
     if (!candidates.length)
       return {

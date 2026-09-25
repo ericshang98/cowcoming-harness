@@ -2,6 +2,7 @@ import { normalizeProfile } from "./capabilities.mjs";
 import { planIntent } from "./planner.mjs";
 import { createSafetyArbiter } from "./safety.mjs";
 import { validateIntent, freezeDeep, requireString } from "./validation.mjs";
+import { requestedMotion } from "./models.mjs";
 function bounded(promise, signal) {
   return new Promise((resolve, reject) => {
     if (signal.aborted) return reject(signal.reason);
@@ -140,6 +141,11 @@ export function createRuntime({
       intent = validateIntent(
         await bounded(model.decide(input, { profile: p, signal }), signal),
       );
+      if (requestedMotion(input.text))
+        intent = validateIntent({
+          ...intent,
+          requiredMotion: requestedMotion(input.text),
+        });
       if (intent.requestId !== input.requestId)
         throw new Error("model changed requestId");
       if (intent.type === "stop") {

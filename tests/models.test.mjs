@@ -6,6 +6,7 @@ import {
   MockModelAdapter,
   createRuntime,
   RecordingExecutor,
+  planIntent,
 } from "../src/index.mjs";
 const profile = await loadProfile(
   new URL("../profiles/simulator.json", import.meta.url),
@@ -45,6 +46,22 @@ test("JEV and Laya use typed choices with unsupported and host-bound correlation
       },
     );
   }
+});
+test("explicit nod cannot become a wave, while abstract agreement can", async () => {
+  const waving = await loadProfile(
+    new URL("../profiles/waving-robot.json", import.meta.url),
+  );
+  const m = new MockModelAdapter();
+  assert.equal(
+    planIntent(await m.decide({ requestId: "n", text: "请点一下头" }), waving)
+      .status,
+    "unsupported",
+  );
+  assert.equal(
+    planIntent(await m.decide({ requestId: "a", text: "表示同意" }), waving)
+      .status,
+    "ready",
+  );
 });
 test("typed adapter rejects unknown choices and malformed confidence before planning", async () => {
   for (const answer of [

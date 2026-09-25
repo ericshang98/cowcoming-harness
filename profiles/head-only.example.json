@@ -1,0 +1,26 @@
+{
+  "version": 1,
+  "id": "head-only-example",
+  "label": "双轴头部示例 · 未标定",
+  "calibrated": false,
+  "joints": {
+    "headYaw": {
+      "id": 1,
+      "centerDeg": 90,
+      "scaleDeg": 15,
+      "direction": 1,
+      "minDeg": 60,
+      "maxDeg": 120,
+      "maxSpeedDegS": 40
+    },
+    "headPitch": {
+      "id": 2,
+      "centerDeg": 90,
+      "scaleDeg": 12,
+      "direction": -1,
+      "minDeg": 65,
+      "maxDeg": 115,
+      "maxSpeedDegS": 40
+    }
+  }
+}
