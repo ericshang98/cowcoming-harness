@@ -36,7 +36,7 @@ try {
     }),
     errors = [];
   page.on("pageerror", (e) => errors.push(e.message));
-  await page.goto(base);
+  await page.goto(base + (base.includes('?') ? '&' : '?') + 'view=lab');
   const run = () => page.getByRole("button", { name: "运行 →" }).click();
   const done = () =>
     page.getByText("软件执行器预演完成。", { exact: true }).waitFor();
@@ -49,7 +49,8 @@ try {
   await page
     .getByLabel("动作能力", { exact: true })
     .selectOption("waving-robot");
-  await page.getByRole("button", { name: "确认点头", exact: true }).click();
+  await page.getByLabel('让它回应你', {exact:true}).fill('表示同意');
+  await run();
   await done();
   assert.ok(
     await page.locator("code").filter({ hasText: "arm_wave" }).count(),
@@ -192,7 +193,7 @@ try {
       await gate;
       await route.fulfill({ response });
     });
-    await delayed.goto(base);
+    await delayed.goto(base + (base.includes('?') ? '&' : '?') + 'view=lab');
     await delayed.getByRole("button", { name: "运行 →" }).click();
     await sessionStarted;
     await delayed

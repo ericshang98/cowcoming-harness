@@ -39,3 +39,6 @@ await runtime.handle({ requestId: "example-1", text: "请点一下头" });
 本地服务仅监听 `127.0.0.1`，校验 Host、Origin、JSON 和页面会话 token。服务器不是互联网多租户网关；不要把开发端口直接公开。硬件操作须服务端启用、使用固定 profile、页面确认现场就绪并获取 60 秒启动租约。租约限定新动作的下发时间，不会在动作中途自动卸力。
 
 API：`GET /api/config`，`POST /api/session`、`/api/run`（NDJSON events + result）、`/api/stop`、`/api/resume`、`/api/arm`、`/api/close`。POST 要带 `X-Harness-Token`；session 只接受软件沙盒/预演或显式配置的 BenBen。关闭空闲会话和切换页面配置不会自动卸力。活动请求连接中断会尝试停止自己的动作；不能保证网络失联时机械臂已停止，应以本机控制器为准。
+# v0.2 标准动作补充
+
+软件宠物使用独立的 `MotionScore` 关键帧合同，见[动作格式与机器人映射](pet-playground.md)。`requestId` 关联 JEV 选择、软件完成与硬件轨迹；每端证据分别保留。旧单步 Intent Runtime 继续适用于开发者实验室；`requiredMotion` 在明确动作输入时由 host 绑定，Planner 只匹配 capability 的 `motion` 或 `visual`，不把明确点头换成挥手。

@@ -1,8 +1,8 @@
 # Cowcoming Harness
 
-把用户意图、AI 决策、机器人能力和角色表现分开。用同一套运行协议，先在浏览器里预演，再接入自己的机器人。
+**先在 localhost 养一只软件牛，再把同一动作接到自己的机器人。**
 
-**开箱即用：不需要 API Key、机械臂、GLB 或模型权重。** 内置角色由代码生成，默认决策来源是明确标注的固定规则。真实 AI 与 BenBen 均为可选接入。
+v0.2 提供六种人格形态、18 项预设动作（每项两个变体）、可编辑情绪、页面 JEV Key 设置和独立的软件培养。默认程序牛无需 API Key、机械臂、GLB 或模型权重；按钮用于试玩，输入文字接入真实 JEV 后选择动作与情绪。程序牛是轻量开源示例，原站精细 GLB 仍独立管理。
 
 ```bash
 git clone https://github.com/ericshang98/cowcoming-harness.git
@@ -14,10 +14,22 @@ npm run dev
 
 打开终端给出的 `http://127.0.0.1:4186/`。端口被占用时可以用 `HARNESS_PORT=4187 npm run dev`，不会结束已有服务。
 
-## 可以直接试什么
+## 先玩软件宠物
+
+1. 点动作试看，切换小牛、普通牛来、骚牛、硬牛、仙牛和暗黑牛。不同形态有不同动作开放范围与表现节奏。
+2. 打开「模型设置」，填写 Cloudflare Account ID 与 JEV API Key，或自己的 typed JEV 端点。Key 仅存在本地服务内存，页面不会持久保存或导出。
+3. 输入“请点一下头”，看到实际 JEV 往返耗时、置信度、情绪和动作。失败明确提示，不自动伪装为演示成功。台词为标注过的预设，不冒充 JEV 聊天输出。
+4. 可选配置独立进化评估 LLM，开启每 N 轮判断成长；试玩不计轮，JEV 软件动作实际播完才计入软件培养。手动切换与重置不伪造自动进化。
+5. 导入/导出动作与情绪包；打开机器人区域导入关节映射、预览和导出角度时间轴。缺轴、越界或超速会拒绝编译，页面不会自动驱动串口。
+
+[完整软件体验与动作框架](docs/pet-playground.md)包含数据格式、九个逻辑轴、驱动接口、计轮规则和接入边界。
+
+## 开发者实验室
+
+页面右上入口或 `?view=lab` 保留 v0.1 的底层协议实验：
 
 1. 输入“请点一下头”：查看意图、计划、软件执行事件和独立的 3D 播放记录。
-2. 把“动作能力”切到挥手机器人：相同的确认意图映射到 `arm_wave`；跳舞会明确显示不支持。
+2. 把“动作能力”切到挥手机器人：输入“表示同意”可映射到 `arm_wave`；明确要求点头时不会替换为挥手，而是显示不支持。
 3. 切换“仅查看 AI 决策”：只生成计划，不播放动画或驱动设备。
 4. 导入自己的单文件 GLB，把其动画片段绑定到能力 ID。文件只在浏览器内读取，不上传。
 5. 编辑 JSON 能力配置、停止本轮、恢复新请求、导出完整记录。
@@ -66,12 +78,16 @@ npm test                  # Node 合同、运行、模型适配、HTTP 边界
 npm run test:bridge       # Python 假控制器测试，不驱动机械臂
 npm run demo              # 无等待的记录执行器示例
 npm run sandbox           # 只生成意图和计划
+npm run demo:motion -- wave_left # 仅编译标准动作与示例关节映射，不访问设备
 npm run build
 # 可选浏览器验收：先 npx playwright install chromium，再 npm run qa
+npm run qa:pet            # 软件宠物与 JEV/进化固定响应验收
 ```
 
 在 Cowcoming 主仓库中同样可用：`npm run harness:dev`、`npm run test:harness`、`npm run build:harness`。本目录可以独立检出，不依赖网站的素材或私有包。
 
 Apache-2.0 只覆盖本仓库原创代码及程序生成示例；用户导入的角色、第三方模型和 BenBen 仓库各自遵循其许可证。参见 [LICENSE](LICENSE) 与 [第三方说明](THIRD_PARTY_NOTICES.md)。贡献流程见 [CONTRIBUTING.md](CONTRIBUTING.md)。
+
+维护者以 Cowcoming 主仓库 `harness/` 为发行代码真源，按提交导出到独立仓库；树哈希必须一致，见 [发行同步](docs/releasing.md)。独立仓库的社区改动也应回收到同一目录，避免两边手改漂移。
 
 **English:** A modular intent-to-capability runtime for characters and robots. Run the local lab without keys, weights, or hardware; bring your own model endpoint, robot executor, and GLB. Simulation, timed device commands, and measured physical feedback remain distinct. This release is a software integration baseline, not a validated robotics controller.
